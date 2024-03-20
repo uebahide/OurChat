@@ -1,5 +1,5 @@
 ### backend
---$cd backend
+- $cd backend
 -check your python version=3.9
 -$pip install -r requirements
 -$python app.py
