@@ -8,6 +8,8 @@ export default function ProfileScreen({navigation}){
   const [text, setText] = React.useState("");
   const [userName, setUserName] = useState("")
   const [userId, setUserId] = useState("")
+  const [serverId, setServerId] = useState("")
+  const [port, setPort] = useState("")
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +17,8 @@ export default function ProfileScreen({navigation}){
         const profile = await getProfile()
         setUserName(profile.userName)
         setUserId(profile.userId)
+        setServerId(profile.serverId)
+        setPort(profile.port)
       }catch(error){
         console.log(error)
       }
@@ -24,8 +28,8 @@ export default function ProfileScreen({navigation}){
   }, [])
   
   const register = async () => {
-    if(userName != "" && userId != ""){
-      await setProfile(userName, userId)
+    if(userName != "" && userId != "" && serverId != "" && port != ""){
+      await setProfile(userName, userId, serverId, port)
       navigation.navigate('Chat')
     }
   }
@@ -43,6 +47,18 @@ export default function ProfileScreen({navigation}){
         placeholder='id'
         value={userId}
         onChangeText={text => setUserId(text)}
+      />
+      <TextInput
+        label="server ip"
+        placeholder='ip'
+        value={serverId}
+        onChangeText={text => setServerId(text)}
+      />
+      <TextInput
+        label="server port"
+        placeholder='port '
+        value={port}
+        onChangeText={text => setPort(text)}
       />
       <Button 
         icon="update"

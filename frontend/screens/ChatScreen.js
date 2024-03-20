@@ -8,6 +8,8 @@ export default function ChatScreen() {
   const [messages, setMessages] = useState([])
   const [userName, setUserName] = useState("")
   const [userId, setUserId] = useState("")
+  const [serverId, setServerId] = useState("")
+  const [port, setPort] = useState("")
   const [socketInstance, setSocketInstance] = useState(null)
 
   useFocusEffect(
@@ -17,13 +19,15 @@ export default function ChatScreen() {
           const profile = await getProfile();
           setUserName(profile.userName);
           setUserId(profile.userId);
+          setServerId(profile.serverId);
+          setPort(profile.port);
         } catch (error) {
           console.log(error);
         }
       };
       fetchData();
   
-      const socket = io('http://192.168.1.153:8000');
+      const socket = io(`http://${serverId}:${port}`);
       socket.on('connect', () => {
         console.log('socket connected');
       });
@@ -45,7 +49,7 @@ export default function ChatScreen() {
   
       setSocketInstance(socket)
       return () => socket.disconnect();
-    }, [])
+    }, [userName. userId, serverId, port])
   );
 
   useEffect(() => {
