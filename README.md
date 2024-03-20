@@ -1,11 +1,11 @@
-###backend
--$cd backend
+### backend
+--$cd backend
 -check your python version=3.9
 -$pip install -r requirements
 -$python app.py
--check your server id / port number
+-check your server id / port number(not 127.0.0.1, your local machine's ip address)
 
-###frontend
+### frontend
 -$cd frontend
 -$npm install 
 -$npx expo start
